@@ -1,0 +1,108 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Image Macro Meme Generator</title>
+    <style>
+        #header, #instructions, #memeForm{
+            text-align: center;
+            margin: 20px;
+
+        }
+        #topdiv{
+            font-size: 20;
+            width: 300px;
+            position: relative;
+            top: 30px;
+            text-align: center;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: white;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+        #botdiv{
+            font-size: 20;
+            width: 300px;
+            position: relative;
+            top: -30px;
+            text-align: center;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            color: white;
+            text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+        }
+        .img{
+            width: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box{
+            display: inline-block;
+            vertical-align: top;
+        }
+
+    </style>
+</head>
+<body>
+    <h1 id="header">Image Macro Meme Generator</h1>
+    <div id="instructions">Instructions:
+    <div>1) Fill out the form and press Create! to make a meme.</div>
+    <div>2) Click on a meme to delete it.</div>
+    </div>
+    <form action="#" id="memeForm">
+        <div>
+            <label for="image">Image URL</label>
+            <input type="text" id="image">
+        </div>
+        <div>
+            <label for="toptext">Top Text</label>
+            <input type="text" id="toptext">
+        </div>
+        <div>
+            <label for="bottomtext">Bottom Text</label>
+            <input type="text" id="bottomtext">
+        </div>
+        <div id="submit">
+            <input type="submit" value="Create!">
+        </div>
+    </form>
+    <div id="memes">
+        
+    </div>
+    <script>
+        var container = document.getElementById("memes");
+        var button = document.getElementById("submit");
+        button.onclick = function submitClick(){
+            var newImage = document.getElementById("image").value;
+                if (newImage !== ""){
+                    var topText = document.getElementById("toptext").value;
+                    var bottomText = document.getElementById("bottomtext").value;
+                    var addImg = document.createElement("img");
+                    addImg.setAttribute("width",300);
+                    
+                addImg.src = newImage;
+                
+                var newSpan = document.createElement("span");
+                newSpan.setAttribute("class","box");
+                var topDiv = document.createElement("div");
+                var botDiv = document.createElement("div");
+                topDiv.setAttribute("id","topdiv");
+                botDiv.setAttribute("id","botdiv");
+                var newSubSpan = document.createElement("span");
+                container.append(newSpan);
+                newSpan.append(topDiv);
+                topDiv.append(topText);
+                newSpan.append(newSubSpan);
+                newSubSpan.append(addImg);
+                newSpan.append(botDiv);
+                botDiv.append(bottomText);
+                document.getElementById("memeForm").reset();
+                }
+        }
+        var delMemes = document.getElementById("memes");
+        delMemes.onclick = function deleteClick(e){
+            e.target.parentNode.parentNode.remove();
+        }
+    </script>
+</body>
+</html>
